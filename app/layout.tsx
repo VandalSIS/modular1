@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
+  verification: {
+    google: "IaN1cLw291no6iGr7uqsjhjkHjIm8LNO8W-B_5KWzds",
+  },
 };
 
 export const viewport: Viewport = {
