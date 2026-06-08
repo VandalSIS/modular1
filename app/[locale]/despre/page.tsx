@@ -98,42 +98,6 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="bg-canvas py-24 md:py-32">
-        <div className="container-tight">
-          <Reveal>
-            <div className="mb-12 flex flex-col gap-3">
-              <span className="eyebrow">{dict.despre.foundersTitle}</span>
-              <h2 className="heading-display text-display-xl max-w-[18ch] text-balance">
-                {dict.despre.foundersTitle}
-              </h2>
-            </div>
-          </Reveal>
-          <div className="grid gap-10 md:grid-cols-2">
-            {dict.despre.founders.map((founder, idx) => (
-              <Reveal key={founder.name} delay={idx * 0.05}>
-                <article className="flex flex-col gap-5">
-                  {/* TODO: replace placeholder image with real founder photo */}
-                  <div className="relative aspect-[4/5] overflow-hidden bg-bone">
-                    <Image
-                      src={idx === 0 ? "/projects/carcase-frame-03.jpg" : "/projects/container-interior-01.jpg"}
-                      alt={`${founder.name} — ${founder.role}`}
-                      fill
-                      sizes="(min-width:768px) 50vw, 100vw"
-                      className="ken-burns object-cover grayscale"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="heading-display text-2xl">{founder.name}</h3>
-                    <p className="text-xs uppercase tracking-[0.18em] text-mist">{founder.role}</p>
-                    <p className="text-sm leading-relaxed text-ink/70">{founder.bio}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="bg-bone/30 py-24">
         <div className="container-tight">
           <Reveal>
@@ -163,33 +127,26 @@ export default async function AboutPage({
       </section>
 
       <section className="bg-canvas py-24">
-        <div className="container-tight grid gap-12 lg:grid-cols-2">
+        <div className="container-tight">
           <Reveal>
-            <div className="flex flex-col gap-4">
-              <span className="eyebrow">{dict.despre.certificationsTitle}</span>
-              <ul className="flex flex-col gap-3 border-y border-line py-6">
-                {dict.despre.certifications.map((c) => (
-                  <li key={c} className="flex items-start gap-3 text-sm text-ink/80">
-                    <span className="mt-2 h-px w-3 flex-none bg-ochre" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
+            <div className="mb-12 flex flex-col gap-3">
+              <span className="eyebrow">{dict.despre.whyTitle}</span>
+              <h2 className="heading-display text-display-lg max-w-[20ch] text-balance">
+                {dict.despre.whyLead}
+              </h2>
             </div>
           </Reveal>
-          <Reveal delay={0.05}>
-            <div className="flex flex-col gap-4">
-              <span className="eyebrow">{dict.despre.partnersTitle}</span>
-              <ul className="flex flex-col gap-3 border-y border-line py-6">
-                {dict.despre.partners.map((p) => (
-                  <li key={p} className="flex items-start gap-3 text-sm text-ink/80">
-                    <span className="mt-2 h-px w-3 flex-none bg-ochre" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+          <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {dict.despre.whyPoints.map((p, idx) => (
+              <Reveal key={p.title} delay={idx * 0.04}>
+                <div className="flex h-full flex-col gap-3 bg-canvas p-8">
+                  <span className="heading-display text-2xl text-ochre">0{idx + 1}</span>
+                  <h3 className="heading-display text-lg">{p.title}</h3>
+                  <p className="text-sm leading-relaxed text-ink/70">{p.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

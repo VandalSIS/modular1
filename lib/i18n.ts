@@ -151,16 +151,13 @@ export interface Dictionary {
     lead: string;
     storyTitle: string;
     storyBody: string;
-    foundersTitle: string;
-    founders: { name: string; role: string; bio: string }[];
     valuesTitle: string;
     values: { title: string; description: string }[];
     workshopTitle: string;
     workshopLead: string;
-    certificationsTitle: string;
-    certifications: string[];
-    partnersTitle: string;
-    partners: string[];
+    whyTitle: string;
+    whyLead: string;
+    whyPoints: { title: string; description: string }[];
   };
   quickLead: {
     eyebrow: string;
@@ -627,19 +624,6 @@ const ro: Dictionary = {
     storyTitle: "Povestea noastră",
     storyBody:
       "De la înființarea noastră în anul 2024, ne-am propus să redefinim modul în care spațiile pot fi create, adaptate și utilizate, oferind soluții flexibile, durabile și eficiente pentru o gamă variată de necesități. Specializarea noastră principală constă în comercializarea de carcase și containere modulare de înaltă calitate. Înțelegem că fiecare afacere sau proiect are cerințe unice, de aceea punem la dispoziția clienților noștri o diversitate de mărimi și configurații. Fie că aveți nevoie de un spațiu pentru o cafenea modernă, un birou mobil, un punct comercial sau o unitate de depozitare, containerele noastre reprezintă soluția ideală pentru a vă optimiza spațiul rapid și economic.",
-    foundersTitle: "Echipa Modus",
-    founders: [
-      {
-        name: "// TODO: Nume Fondator 1",
-        role: "Co-fondator & Director General",
-        bio: "// TODO: bio scurt — 2-3 fraze despre experiența, viziunea și domeniul de specializare al fondatorului.",
-      },
-      {
-        name: "// TODO: Nume Fondator 2",
-        role: "Co-fondator & Director Producție",
-        bio: "// TODO: bio scurt — pune accent pe anii de experiență în construcții metalice și ce aduce nou în Modus.",
-      },
-    ],
     valuesTitle: "Ce ne ghidează",
     values: [
       {
@@ -666,19 +650,39 @@ const ro: Dictionary = {
     workshopTitle: "Atelierul nostru",
     workshopLead:
       "Pe str. Petru Rareș 62, în zona centru a Chișinăului — vino să vezi cum lucrăm.",
-    certificationsTitle: "Certificări & standarde",
-    certifications: [
-      "ISO 9001 — Management calitate (// TODO: confirmare)",
-      "ISO 3834-2 — Calificare suduri",
-      "EN 1090-2 — Execuție structuri din oțel",
-      "CE marking pentru toate produsele structurale",
-    ],
-    partnersTitle: "Parteneri",
-    partners: [
-      "// TODO: ArcelorMittal — oțel structural",
-      "// TODO: Kingspan — panouri sandwich",
-      "// TODO: Reynaers Aluminium — tâmplărie",
-      "// TODO: Knauf — sisteme interioare",
+    whyTitle: "De ce Modus Construct",
+    whyLead: "Ce primești când lucrezi cu noi",
+    whyPoints: [
+      {
+        title: "Atelier propriu în Chișinău",
+        description:
+          "Producem local, fără intermediari. Poți vizita atelierul oricând și verifica calitatea în timpul producției.",
+      },
+      {
+        title: "Livrare în toată Moldova",
+        description:
+          "Transport și descărcare cu macara incluse, în orice raion al țării. Modulul ajunge gata de utilizare.",
+      },
+      {
+        title: "Termen ferm 4–8 săptămâni",
+        description:
+          "Producem după grafic stabilit din contract. Comunicăm săptămânal stadiul lucrărilor.",
+      },
+      {
+        title: "Garanție de structură",
+        description:
+          "Oferim garanție scrisă pentru carcasa metalică și suport tehnic post-livrare pentru orice intervenție.",
+      },
+      {
+        title: "Configurație personalizată",
+        description:
+          "Adaptăm dimensiunile, ferestrele, izolația și finisajele exact pe nevoile proiectului tău.",
+      },
+      {
+        title: "Preț transparent",
+        description:
+          "Ofertă detaliată pe poziții, fără costuri ascunse. Plata eșalonată conform stadiilor de execuție.",
+      },
     ],
   },
   quickLead: {
@@ -1188,19 +1192,6 @@ const ru: Dictionary = {
     storyTitle: "Наша история",
     storyBody:
       "С момента основания в 2024 году мы поставили перед собой задачу переосмыслить способ создания, адаптации и использования пространств, предлагая гибкие, долговечные и эффективные решения для разнообразных нужд. Наша основная специализация — продажа высококачественных модульных каркасов и контейнеров. Мы понимаем, что у каждого бизнеса или проекта свои уникальные требования, поэтому предлагаем клиентам разнообразие размеров и конфигураций. Будь то пространство для современного кафе, мобильный офис, торговая точка или складская единица — наши контейнеры являются идеальным решением для оптимизации пространства быстро и экономично.",
-    foundersTitle: "Команда Modus",
-    founders: [
-      {
-        name: "// TODO: Имя Основателя 1",
-        role: "Сооснователь и Генеральный директор",
-        bio: "// TODO: краткая биография — 2-3 фразы об опыте, видении и области специализации основателя.",
-      },
-      {
-        name: "// TODO: Имя Основателя 2",
-        role: "Сооснователь и Директор производства",
-        bio: "// TODO: краткая биография — акцент на годы опыта в металлоконструкциях и что нового приносит в Modus.",
-      },
-    ],
     valuesTitle: "Что нас направляет",
     values: [
       {
@@ -1227,19 +1218,39 @@ const ru: Dictionary = {
     workshopTitle: "Наш цех",
     workshopLead:
       "На ул. Петру Рареш 62, в центре Кишинёва — приходите посмотреть, как мы работаем.",
-    certificationsTitle: "Сертификаты и стандарты",
-    certifications: [
-      "ISO 9001 — Менеджмент качества (// TODO: подтверждение)",
-      "ISO 3834-2 — Квалификация сварок",
-      "EN 1090-2 — Изготовление стальных конструкций",
-      "CE-маркировка для всех конструктивных изделий",
-    ],
-    partnersTitle: "Партнёры",
-    partners: [
-      "// TODO: ArcelorMittal — конструкционная сталь",
-      "// TODO: Kingspan — сэндвич-панели",
-      "// TODO: Reynaers Aluminium — столярные изделия",
-      "// TODO: Knauf — внутренние системы",
+    whyTitle: "Почему Modus Construct",
+    whyLead: "Что вы получаете, работая с нами",
+    whyPoints: [
+      {
+        title: "Собственный цех в Кишинёве",
+        description:
+          "Производим локально, без посредников. Можете в любое время посетить цех и проверить качество в процессе изготовления.",
+      },
+      {
+        title: "Доставка по всей Молдове",
+        description:
+          "Транспорт и разгрузка краном включены, в любой район страны. Модуль прибывает готовым к использованию.",
+      },
+      {
+        title: "Чёткий срок 4–8 недель",
+        description:
+          "Производим по графику из договора. Еженедельно сообщаем о статусе работ.",
+      },
+      {
+        title: "Гарантия на конструкцию",
+        description:
+          "Предоставляем письменную гарантию на металлический каркас и техподдержку после поставки.",
+      },
+      {
+        title: "Индивидуальная конфигурация",
+        description:
+          "Адаптируем размеры, окна, утепление и отделку точно под нужды вашего проекта.",
+      },
+      {
+        title: "Прозрачная цена",
+        description:
+          "Детальное предложение по позициям, без скрытых расходов. Поэтапная оплата по стадиям выполнения.",
+      },
     ],
   },
   quickLead: {
