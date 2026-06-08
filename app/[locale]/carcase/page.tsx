@@ -9,6 +9,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
 
 export async function generateMetadata({
   params,
@@ -200,6 +201,23 @@ export default async function CarcasePage({
               </Reveal>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="bg-bone py-20 md:py-28">
+        <div className="container-tight grid gap-10 lg:grid-cols-[1.1fr,1fr] lg:items-start">
+          <div className="flex flex-col gap-4">
+            <span className="eyebrow">{dict.quickLead.eyebrow}</span>
+            <h2 className="heading-display text-display-xl text-balance">
+              {dict.carcase.ctaTitle}
+            </h2>
+            <p className="max-w-xl text-base leading-relaxed text-ink/70">
+              {dict.carcase.ctaLead}
+            </p>
+          </div>
+          <Reveal>
+            <QuickLeadForm locale={locale} dict={dict} defaultInterest="carcasa" />
+          </Reveal>
         </div>
       </section>
 

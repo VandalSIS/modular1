@@ -65,8 +65,7 @@ export function NavBar({ locale, dict }: NavBarProps) {
           className="flex items-center gap-2 text-ink"
           aria-label={`${site.name} — ${dict.nav.home}`}
         >
-          <Logo className="h-7 w-7" />
-          <span className="heading-display text-lg leading-none">{site.name.toLowerCase()}</span>
+          <Logo className="h-6 w-auto md:h-7" />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

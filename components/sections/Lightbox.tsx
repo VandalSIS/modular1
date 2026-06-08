@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/site";
 import type { Dictionary } from "@/lib/i18n";
 import type { PortfolioProject } from "@/lib/portfolio";
+import { QuickLeadModal } from "../forms/QuickLeadForm";
 
 interface LightboxProps {
   project: PortfolioProject | null;
@@ -136,12 +137,42 @@ export function Lightbox({ project, locale, dict, onClose }: LightboxProps) {
                   ))}
                 </ul>
               </div>
+              <div className="mt-auto pt-4">
+                <QuickLeadModal
+                  locale={locale}
+                  dict={dict}
+                  projectContext={project.title[locale]}
+                  defaultInterest={mapTypeToInterest(project.type)}
+                  triggerClassName="btn-primary w-full justify-center"
+                />
+              </div>
             </aside>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
   );
+}
+
+function mapTypeToInterest(type: PortfolioProject["type"]): string {
+  switch (type) {
+    case "carcasa":
+      return "carcasa";
+    case "container":
+    case "birou":
+      return "container";
+    case "casa":
+    case "cabana":
+      return "casa";
+    case "magazin":
+      return "birou";
+    case "sanitar":
+      return "sanitar";
+    case "paza":
+      return "container";
+    default:
+      return "altul";
+  }
 }
 
 function Stat({ label, value }: { label: string; value: string }) {

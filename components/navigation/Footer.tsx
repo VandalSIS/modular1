@@ -33,8 +33,7 @@ export function Footer({ locale, dict }: FooterProps) {
               href={localizedHref("/", locale)}
               className="flex items-center gap-2 text-ink"
             >
-              <Logo className="h-8 w-8" />
-              <span className="heading-display text-2xl">{site.name.toLowerCase()}</span>
+              <Logo className="h-9 w-auto" />
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-ink/70">{dict.footer.tagline}</p>
             <div className="flex gap-3 pt-2">

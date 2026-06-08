@@ -7,6 +7,8 @@ import { PageHero } from "@/components/sections/PageHero";
 import { PortfolioGrid } from "@/components/sections/PortfolioGrid";
 import { portfolio } from "@/lib/portfolio";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
+import { Reveal } from "@/components/motion/Reveal";
 
 export async function generateMetadata({
   params,
@@ -62,6 +64,24 @@ export default async function PortfolioPage({
         alt="Proiecte modulare livrate Modus Construct"
       />
       <PortfolioGrid locale={locale} dict={dict} withFilters />
+
+      <section className="bg-bone py-20 md:py-28">
+        <div className="container-tight grid gap-10 lg:grid-cols-[1.1fr,1fr] lg:items-start">
+          <div className="flex flex-col gap-4">
+            <span className="eyebrow">{dict.quickLead.eyebrow}</span>
+            <h2 className="heading-display text-display-xl text-balance">
+              {dict.quickLead.title}
+            </h2>
+            <p className="max-w-xl text-base leading-relaxed text-ink/70">
+              {dict.quickLead.lead}
+            </p>
+          </div>
+          <Reveal>
+            <QuickLeadForm locale={locale} dict={dict} />
+          </Reveal>
+        </div>
+      </section>
+
       <CtaBanner
         locale={locale}
         dict={dict}

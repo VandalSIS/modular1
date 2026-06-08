@@ -162,6 +162,30 @@ export interface Dictionary {
     partnersTitle: string;
     partners: string[];
   };
+  quickLead: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    inlineTitle: string;
+    inlineLead: string;
+    triggerLabel: string;
+    triggerLabelProject: string;
+    name: string;
+    contact: string;
+    contactHint: string;
+    interest: string;
+    interestOptions: { value: string; label: string }[];
+    message: string;
+    messagePlaceholder: string;
+    submit: string;
+    submitting: string;
+    successTitle: string;
+    successLead: string;
+    errorLead: string;
+    fullFormCta: string;
+    close: string;
+    forProject: string;
+  };
   oferta: {
     eyebrow: string;
     title: string;
@@ -655,6 +679,37 @@ const ro: Dictionary = {
       "// TODO: Reynaers Aluminium — tâmplărie",
       "// TODO: Knauf — sisteme interioare",
     ],
+  },
+  quickLead: {
+    eyebrow: "Solicitare rapidă",
+    title: "Cere ofertă în 30 de secunde",
+    lead: "Lasă-ne datele și revenim în maxim 24 de ore cu o estimare personalizată.",
+    inlineTitle: "Te interesează acest proiect?",
+    inlineLead: "Trimite-ne câteva detalii și revenim cu o ofertă similară pentru tine.",
+    triggerLabel: "Cere ofertă rapid",
+    triggerLabelProject: "Cere ofertă pentru acest proiect",
+    name: "Nume",
+    contact: "Email sau telefon",
+    contactHint: "Cum preferi să te contactăm",
+    interest: "Ce te interesează?",
+    interestOptions: [
+      { value: "carcasa", label: "Carcasă modulară" },
+      { value: "container", label: "Container la cheie" },
+      { value: "casa", label: "Casă modulară" },
+      { value: "birou", label: "Birou / pavilion comercial" },
+      { value: "sanitar", label: "Punct sanitar / WC" },
+      { value: "altul", label: "Altceva / nu sunt sigur" },
+    ],
+    message: "Detalii (opțional)",
+    messagePlaceholder: "Suprafață aproximativă, locație, termen…",
+    submit: "Trimite cererea",
+    submitting: "Se trimite…",
+    successTitle: "Mulțumim!",
+    successLead: "Am primit cererea ta. Te contactăm în maxim 24 de ore.",
+    errorLead: "Ceva n-a mers. Încearcă din nou sau scrie-ne pe WhatsApp.",
+    fullFormCta: "Vreau să completez formularul detaliat",
+    close: "Închide",
+    forProject: "Pentru proiectul",
   },
   oferta: {
     eyebrow: "Începem împreună",
@@ -1184,6 +1239,37 @@ const ru: Dictionary = {
       "// TODO: Reynaers Aluminium — столярные изделия",
       "// TODO: Knauf — внутренние системы",
     ],
+  },
+  quickLead: {
+    eyebrow: "Быстрая заявка",
+    title: "Заявка за 30 секунд",
+    lead: "Оставьте данные — перезвоним в течение 24 часов с персональной оценкой.",
+    inlineTitle: "Заинтересовал этот проект?",
+    inlineLead: "Отправьте несколько деталей — подготовим аналогичное предложение для вас.",
+    triggerLabel: "Быстрая заявка",
+    triggerLabelProject: "Запросить такой же проект",
+    name: "Имя",
+    contact: "Email или телефон",
+    contactHint: "Как с вами связаться",
+    interest: "Что вас интересует?",
+    interestOptions: [
+      { value: "carcasa", label: "Модульный каркас" },
+      { value: "container", label: "Контейнер «под ключ»" },
+      { value: "casa", label: "Модульный дом" },
+      { value: "birou", label: "Офис / коммерческий павильон" },
+      { value: "sanitar", label: "Санитарный пункт / WC" },
+      { value: "altul", label: "Другое / не уверен" },
+    ],
+    message: "Детали (опционально)",
+    messagePlaceholder: "Примерная площадь, локация, сроки…",
+    submit: "Отправить заявку",
+    submitting: "Отправка…",
+    successTitle: "Спасибо!",
+    successLead: "Мы получили вашу заявку. Свяжемся с вами в течение 24 часов.",
+    errorLead: "Что-то пошло не так. Попробуйте снова или напишите нам в WhatsApp.",
+    fullFormCta: "Заполнить полную форму",
+    close: "Закрыть",
+    forProject: "По проекту",
   },
   oferta: {
     eyebrow: "Начинаем вместе",
