@@ -27,11 +27,13 @@ export function Reveal({ children, className, delay = 0, y = 16, as = "div" }: R
   const inView = useInView(ref, { once: true, amount: 0.05 });
   const [forceShow, setForceShow] = useState(false);
 
-  // Safety net: after 250ms, if nothing has triggered the observer (e.g. the
-  // element was rendered already inside the viewport during a client-side
-  // navigation), force the visible state so content never gets stuck hidden.
+  // Safety net: after a very short delay, force the visible state. The
+  // IntersectionObserver triggered via `useInView` is the primary path for
+  // the entrance animation, but client-side navigations sometimes mount an
+  // element already inside the viewport without firing the observer. We
+  // never want content to stay hidden, so guarantee visibility.
   useEffect(() => {
-    const t = setTimeout(() => setForceShow(true), 250);
+    const t = setTimeout(() => setForceShow(true), 80);
     return () => clearTimeout(t);
   }, []);
 

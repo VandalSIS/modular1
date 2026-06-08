@@ -5,18 +5,20 @@ import { site, type Locale } from "@/lib/site";
 const LOCALE_COOKIE = "modus_locale";
 const PUBLIC_FILE_RX = /\.(.*)$/;
 
+/**
+ * Locale detection.
+ *
+ * Romanian is the official language of Moldova and the brand's primary
+ * audience, so we ALWAYS land on `ro` by default. The `accept-language`
+ * header is intentionally ignored on first visit (many devices in MD report
+ * `ru` even when the user actually prefers Romanian, which led to the wrong
+ * locale being shown). Russian is only served when the visitor has
+ * explicitly chosen it via the locale switcher (which sets `LOCALE_COOKIE`).
+ */
 function detectLocale(request: NextRequest): Locale {
   const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
   if (cookie && (site.locales as readonly string[]).includes(cookie)) {
     return cookie as Locale;
-  }
-  const header = request.headers.get("accept-language") ?? "";
-  const preferred = header
-    .split(",")
-    .map((part) => part.split(";")[0].trim().toLowerCase());
-  for (const lang of preferred) {
-    if (lang.startsWith("ro")) return "ro";
-    if (lang.startsWith("ru")) return "ru";
   }
   return site.defaultLocale;
 }

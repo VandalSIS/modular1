@@ -52,6 +52,11 @@ export function LocaleSwitcher({ current }: { current: Locale }) {
               key={locale}
               href={swapped(locale)}
               role="menuitem"
+              onClick={() => {
+                // Persist the user's explicit choice for one year so that
+                // the middleware respects it on subsequent visits.
+                document.cookie = `modus_locale=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+              }}
               className={`flex items-center justify-between px-4 py-3 text-sm transition-colors hover:bg-bone ${
                 locale === current ? "text-ink" : "text-ink/70"
               }`}

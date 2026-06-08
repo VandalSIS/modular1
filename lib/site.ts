@@ -3,7 +3,7 @@ export const site = {
   legalName: "Modus Construct SRL",
   domain: "modus.md",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://modus.md",
-  email: "contact@modus.md",
+  email: "berniccristian07@gmail.com",
   phone: "+373 69 216 780",
   phoneRaw: "+37369216780",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "37369216780",
