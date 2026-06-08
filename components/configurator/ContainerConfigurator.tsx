@@ -94,19 +94,23 @@ export function ContainerConfigurator({
     return parts.join(" · ");
   }, [config, locale, dict.oferta]);
 
-  const handleUse = () => {
-    const area = config.length * config.width;
-    if (onUseConfiguration) onUseConfiguration(summary, area);
-    if (typeof window !== "undefined") {
-      window.sessionStorage.setItem(
-        "modus-config",
-        JSON.stringify({ area, message: summary }),
-      );
-      const formEl = document.getElementById("quote-form");
-      if (formEl) {
-        const top = formEl.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top, behavior: "smooth" });
-      }
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleSavePng = () => {
+    if (typeof window === "undefined") return;
+    const canvas = canvasContainerRef.current?.querySelector("canvas");
+    if (!canvas) return;
+    try {
+      const dataUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      const safeArea = (config.length * config.width).toFixed(1);
+      link.download = `modus-container-${config.length}x${config.width}m-${safeArea}m2.png`;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error("[configurator] save image failed", err);
     }
   };
 
@@ -124,12 +128,13 @@ export function ContainerConfigurator({
     <section className="border border-line bg-canvas">
       <div className="grid gap-0 lg:grid-cols-[1.4fr,1fr]">
         <div
+          ref={canvasContainerRef}
           className="relative h-[360px] bg-[#e9e6dd] sm:h-[420px] lg:h-auto lg:min-h-[520px]"
           style={{ touchAction: "pan-y" }}
         >
           <Canvas
             dpr={[1, isMobile ? 1.5 : 2]}
-            gl={{ antialias: true, alpha: false }}
+            gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true }}
             shadows={!isMobile}
             onCreated={({ gl, scene }) => {
               gl.setClearColor("#e9e6dd");
@@ -307,8 +312,23 @@ export function ContainerConfigurator({
             <button type="button" onClick={reset} className="btn-ghost">
               ↺ {dict.oferta.configuratorReset}
             </button>
-            <button type="button" onClick={handleUse} className="btn-primary">
-              {dict.oferta.configuratorSendToQuote}
+            <button
+              type="button"
+              onClick={handleSavePng}
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden
+              >
+                <path d="M8 1.5V10M8 10L4.5 6.5M8 10L11.5 6.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2.5 11.5V13a1.5 1.5 0 0 0 1.5 1.5h8a1.5 1.5 0 0 0 1.5-1.5v-1.5" strokeLinecap="round" />
+              </svg>
+              {dict.oferta.configuratorSavePng}
             </button>
           </motion.div>
         </div>
@@ -387,13 +407,18 @@ function ContainerModel({ config }: { config: ConfigState }) {
   const halfW = width / 2;
   const baseY = 0.16;
 
+  // Distribute windows on the front face, but reserve the right-most ~2m
+  // for the door so glass panes never overlap the entrance.
   const windowPositions = useMemo(() => {
     if (windows === 0) return [] as number[];
-    const margin = 0.6;
-    const usable = length - margin * 2;
-    if (windows === 1) return [0];
+    const leftMargin = 0.6;
+    const doorReserve = 2.2; // matches DoorPanel footprint + breathing room
+    const rightLimit = halfL - doorReserve;
+    const start = -halfL + leftMargin;
+    const usable = Math.max(0, rightLimit - start);
+    if (windows === 1 || usable <= 0.01) return [start + usable / 2];
     return Array.from({ length: windows }, (_, i) => {
-      return -halfL + margin + (usable / (windows - 1)) * i;
+      return start + (usable / (windows - 1)) * i;
     });
   }, [windows, length, halfL]);
 

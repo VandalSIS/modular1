@@ -243,6 +243,7 @@ export interface Dictionary {
     configuratorDoor: string;
     configuratorReset: string;
     configuratorSendToQuote: string;
+    configuratorSavePng: string;
     colorWhite: string;
     colorGraphite: string;
     colorBlack: string;
@@ -800,6 +801,7 @@ const ro: Dictionary = {
     configuratorDoor: "Tip ușă",
     configuratorReset: "Resetează",
     configuratorSendToQuote: "Folosește această configurație",
+    configuratorSavePng: "Salvează imaginea",
     colorWhite: "Alb",
     colorGraphite: "Grafit",
     colorBlack: "Negru",
@@ -1360,6 +1362,7 @@ const ru: Dictionary = {
     configuratorDoor: "Тип двери",
     configuratorReset: "Сбросить",
     configuratorSendToQuote: "Использовать эту конфигурацию",
+    configuratorSavePng: "Сохранить изображение",
     colorWhite: "Белый",
     colorGraphite: "Графит",
     colorBlack: "Чёрный",
