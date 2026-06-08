@@ -15,26 +15,34 @@ interface RevealProps {
 /**
  * Scroll-reveal wrapper.
  *
- * Uses an IntersectionObserver via `useInView` for accurate detection that
- * works across Next.js client-side navigations (where `whileInView` can miss
- * elements that are already visible on mount). A short fallback timer also
- * ensures content is shown even if the observer never fires (e.g. reduced
- * motion, prerendered viewport, or ad-blocker quirks).
+ * Robustness over flair: we try the IntersectionObserver path first, but
+ * always show the content within a frame or two if observation has not
+ * fired (which happens on Next.js client-side navigations and on some
+ * mobile browsers where elements rendered in the initial viewport never
+ * trigger an `inView` event). This guarantees content is never stuck
+ * invisible.
  */
 export function Reveal({ children, className, delay = 0, y = 16, as = "div" }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.05 });
+  const inView = useInView(ref, { once: true, amount: 0.01 });
   const [forceShow, setForceShow] = useState(false);
 
-  // Safety net: after a very short delay, force the visible state. The
-  // IntersectionObserver triggered via `useInView` is the primary path for
-  // the entrance animation, but client-side navigations sometimes mount an
-  // element already inside the viewport without firing the observer. We
-  // never want content to stay hidden, so guarantee visibility.
   useEffect(() => {
-    const t = setTimeout(() => setForceShow(true), 80);
-    return () => clearTimeout(t);
+    // Run the safety net on the next animation frame: if the observer
+    // doesn't pick up the element synchronously (which is the most common
+    // failure mode), we still reveal it without a noticeable delay.
+    const raf = requestAnimationFrame(() => {
+      // Final fallback: always show after 120ms regardless. Cheaper than
+      // pinning logic to viewport math that can break on mobile browsers
+      // with dynamic toolbars.
+      setForceShow(true);
+    });
+    const safety = setTimeout(() => setForceShow(true), 120);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(safety);
+    };
   }, []);
 
   const variants: Variants = {
@@ -43,7 +51,7 @@ export function Reveal({ children, className, delay = 0, y = 16, as = "div" }: R
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.55,
         ease: [0.16, 1, 0.3, 1],
         delay,
       },

@@ -8,7 +8,7 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 import { motion } from "framer-motion";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { Locale } from "@/lib/site";
 import type { Dictionary } from "@/lib/i18n";
@@ -49,6 +49,20 @@ export function ContainerConfigurator({
     windows: 2,
     door: "glass",
   });
+
+  // Detect mobile / coarse pointer once on mount. We disable expensive 3D
+  // interactions there (auto-rotate, pinch zoom, infinite grid) because they
+  // hijack page scroll and cause the canvas to feel like it's "growing" as
+  // the user tries to scroll past it.
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const summary = useMemo(() => {
     const parts: string[] = [];
@@ -109,11 +123,14 @@ export function ContainerConfigurator({
   return (
     <section className="border border-line bg-canvas">
       <div className="grid gap-0 lg:grid-cols-[1.4fr,1fr]">
-        <div className="relative aspect-[4/3] bg-[#e9e6dd] lg:aspect-auto lg:min-h-[520px]">
+        <div
+          className="relative h-[360px] bg-[#e9e6dd] sm:h-[420px] lg:h-auto lg:min-h-[520px]"
+          style={{ touchAction: "pan-y" }}
+        >
           <Canvas
-            dpr={[1, 2]}
+            dpr={[1, isMobile ? 1.5 : 2]}
             gl={{ antialias: true, alpha: false }}
-            shadows
+            shadows={!isMobile}
             onCreated={({ gl, scene }) => {
               gl.setClearColor("#e9e6dd");
               scene.background = new THREE.Color("#e9e6dd");
@@ -134,7 +151,7 @@ export function ContainerConfigurator({
             <directionalLight position={[-6, 6, -4]} intensity={0.8} />
             <hemisphereLight args={[0xffffff, 0x6a6a5a, 0.45]} />
 
-            <Scene config={config} />
+            <Scene config={config} animate={!isMobile} />
 
             <Grid
               position={[0, 0.001, 0]}
@@ -145,9 +162,9 @@ export function ContainerConfigurator({
               sectionSize={5}
               sectionThickness={1}
               sectionColor={ACCENT}
-              fadeDistance={28}
+              fadeDistance={isMobile ? 18 : 28}
               fadeStrength={1.4}
-              infiniteGrid
+              infiniteGrid={!isMobile}
               followCamera={false}
             />
             <ContactShadows
@@ -156,16 +173,17 @@ export function ContainerConfigurator({
               scale={24}
               blur={2.4}
               far={6}
-              resolution={512}
+              resolution={isMobile ? 256 : 512}
             />
             <OrbitControls
-              enableZoom
+              enableZoom={!isMobile}
               enablePan={false}
+              enableRotate
               minDistance={6}
               maxDistance={22}
               maxPolarAngle={Math.PI / 2.05}
               minPolarAngle={Math.PI / 5.5}
-              autoRotate
+              autoRotate={!isMobile}
               autoRotateSpeed={0.6}
               target={[0, 1.4, 0]}
             />
@@ -337,12 +355,19 @@ function Slider({
   );
 }
 
-function Scene({ config }: { config: ConfigState }) {
+function Scene({ config, animate }: { config: ConfigState; animate: boolean }) {
   const group = useRef<THREE.Group>(null);
 
-  // Subtle breathing motion as a sign of life (replaces drei Float)
+  // Subtle breathing motion as a sign of life. Disabled on mobile to keep
+  // the canvas perfectly still while the user is scrolling the page — a
+  // moving 3D scene next to a touch scroll is what makes the configurator
+  // feel like it's "growing" on phones.
   useFrame(({ clock }) => {
     if (!group.current) return;
+    if (!animate) {
+      group.current.position.y = 0;
+      return;
+    }
     const t = clock.getElapsedTime();
     group.current.position.y = Math.sin(t * 0.8) * 0.025;
   });
