@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64">
+  <g transform="translate(8 16)">
+    <rect x="2" y="6" width="28" height="20" fill="none" stroke="#0f0f10" stroke-width="1.6"/>
+    <path d="M2 6L16 16L30 6" fill="none" stroke="#b08442" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M16 16V26" stroke="#0f0f10" stroke-width="1.6"/>
+  </g>
+  <text x="56" y="40" font-family="Georgia, serif" font-size="28" font-weight="500" fill="#0f0f10">modus construct</text>
+</svg>

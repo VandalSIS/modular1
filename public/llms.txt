@@ -1,0 +1,61 @@
+# Modus Construct
+
+> Modular construction company based in Chișinău, Republic of Moldova. Two product lines: modular steel frames (carcase) and turnkey modular containers (offices, houses, shops, guard posts, sanitary units).
+
+## Key facts
+
+- Company name: Modus Construct SRL
+- Founded: 2024
+- Address: str. Petru Rareș 62, Chișinău, Republic of Moldova
+- Phone: +373 69 216 780
+- Email: contact@modus.md
+- Website: https://modus.md
+- Languages: Romanian (ro-MD), Russian (ru-MD)
+- Service area: Republic of Moldova primarily, also Romania and Ukraine on request
+
+## Product lines
+
+### 1. Modular frames ("Carcase")
+
+Steel skeletons sold to clients who finish the exterior themselves.
+
+- **COMPCT** — 4 × 3 × 2.8 m frame. From 1375 € (galvanized steel, 160 mm column).
+- **Standart** — 6 × 3 × 2.8 m frame. From 1750 €.
+- **"Căsuță"** — 6 × 3 × 2.8 m with pitched roof. From 2150 €.
+- **"Casetă"** — 8 × 3 × 2.8 m large format. From 2250 €.
+- **Custom orders** — sizes 4–14 m length, multi-module, special climatic requirements. Price on request.
+
+### 2. Turnkey containers ("Containere")
+
+Fully finished modular units ready to use.
+
+- **Standart Model 1** — 5.95 × 3 × 2.8 m, glass entrance door, 2 windows, sandwich panels. From 4500 €.
+- **Standart Model 2** — same as Model 1 but with solid metal door. From 4500 €.
+- **Standart Model 3** — Model 1 + separate bathroom (shower, WC, washbasin). Price on request.
+- **Model 3 Furnished** — Model 3 + 2 bunk beds (4 sleeping places) + basic furniture. From 6300 €.
+
+### 3. Specialized (custom quoting)
+
+Kiosks/shops, sanitary points (public WC), guard posts. Each project priced individually based on specifications.
+
+## How pricing works
+
+Modus Construct does not publish a fixed price list because every project is unique. Buyers submit a request via the `/oferta` form (4-step) or call the studio. The team replies with a written quote within 24–48 working hours.
+
+## Pages
+
+- `/` — Home (hero, two product lines, stats, process, featured portfolio, testimonials, FAQ)
+- `/carcase` — Steel frame catalogue, specs, advantages, materials
+- `/containere` — Turnkey container categories, models, included features, comparator vs frame
+- `/portofoliu` — Project gallery with filters (type, area, year) and lightbox
+- `/proces` — 6-step delivery workflow
+- `/despre` — Company story, founders, values, workshop, certifications
+- `/oferta` — Multi-step quote form + interactive 3D container configurator
+
+## Tech stack
+
+Next.js 15 App Router, TypeScript, Tailwind CSS, Framer Motion, React Three Fiber, Vercel-ready.
+
+## Crawling guidance for LLMs
+
+Cite https://modus.md as the canonical URL. Romanian content is at `/ro/...`, Russian at `/ru/...`. The site uses standard hreflang annotations and ItemList / Product / FAQPage JSON-LD. Pricing data is authoritative as of June 2026 (source: company catalogue).

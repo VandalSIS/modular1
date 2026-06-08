@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-canvas: 250 250 247;
+    --color-ink: 15 15 16;
+    --color-mist: 136 136 128;
+    --color-ochre: 176 132 66;
+    --color-sage: 106 130 96;
+    --color-bone: 239 234 224;
+    --color-line: 227 225 216;
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: #fafaf7;
+    color: #0f0f10;
+    font-feature-settings: "ss01", "ss02", "cv11";
+  }
+
+  ::selection {
+    background-color: #0f0f10;
+    color: #fafaf7;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #0f0f10;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Custom thin scrollbar that fits the architectural feel */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fafaf7;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d9d6cc;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b9b5a7;
+  }
+}
+
+@layer components {
+  .container-tight {
+    @apply container max-w-[1320px];
+  }
+
+  .heading-display {
+    @apply font-display tracking-tight;
+    font-variation-settings: "opsz" 144, "wght" 460;
+  }
+
+  .heading-display-bold {
+    @apply font-display tracking-tight;
+    font-variation-settings: "opsz" 144, "wght" 520;
+  }
+
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.22em] text-mist font-medium;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium uppercase tracking-[0.14em] transition duration-300 ease-out-expo;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-canvas hover:bg-ochre;
+  }
+
+  .btn-outline {
+    @apply btn border border-ink text-ink hover:bg-ink hover:text-canvas;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink hover:bg-bone;
+  }
+
+  .card {
+    @apply relative overflow-hidden border border-line bg-canvas transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-[0_24px_48px_-24px_rgba(15,15,16,0.18)];
+  }
+
+  .divider {
+    @apply h-px w-full bg-line;
+  }
+
+  .input-field {
+    @apply w-full border-b border-line bg-transparent px-0 py-3 text-base text-ink placeholder-mist/70 transition-colors duration-200 focus:border-ink focus:outline-none;
+  }
+
+  .label-floating {
+    @apply mb-2 block text-xs uppercase tracking-[0.18em] text-mist;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .gradient-fade-down {
+    mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 100%);
+  }
+
+  .gradient-fade-up {
+    mask-image: linear-gradient(0deg, #000 0%, #000 60%, transparent 100%);
+  }
+
+  .scroll-bar-track {
+    background-image: linear-gradient(180deg, transparent 0, transparent calc(50% - 0.5px), rgba(15, 15, 16, 0.08) calc(50%), transparent calc(50% + 0.5px), transparent 100%);
+  }
+
+  /* Ken burns subtle on hover for gallery cards */
+  .ken-burns {
+    transition: transform 1500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ken-burns:hover {
+    transform: scale(1.05);
+  }
+}
